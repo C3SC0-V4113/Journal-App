@@ -1,10 +1,12 @@
-import { Google } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
+
+import { Google } from "@mui/icons-material";
 import { Button, Grid, Link, TextField, Typography } from "@mui/material";
+
 import { AuthLayout } from "../layout";
 import { useForm } from "../../hooks";
-import { useDispatch } from "react-redux";
-import { checkingCredentials } from "../../store/auth";
+import { checkingAuthentication, startGoogleSignIn } from "../../store";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -17,11 +19,12 @@ export const LoginPage = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(formState);
-    dispatch(checkingCredentials());
+    dispatch(checkingAuthentication());
   };
 
   const onGoogleSignIn = () => {
     console.log("onGoogleSignIn");
+    dispatch(startGoogleSignIn());
   };
   return (
     <AuthLayout title="Login">
