@@ -3,8 +3,12 @@ import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { AuthLayout } from "../layout";
 import { useForm } from "../../hooks";
+import { useDispatch } from "react-redux";
+import { checkingCredentials } from "../../store/auth";
 
 export const LoginPage = () => {
+  const dispatch = useDispatch();
+
   const { email, password, onInputChange, formState } = useForm({
     email: "frankjose00@gmail.com",
     password: "123456",
@@ -13,6 +17,7 @@ export const LoginPage = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(formState);
+    dispatch(checkingCredentials());
   };
 
   const onGoogleSignIn = () => {

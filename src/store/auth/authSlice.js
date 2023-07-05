@@ -13,7 +13,9 @@ export const authSlice = createSlice({
   reducers: {
     login: (state, action) => {},
     logout: (state, payload) => {},
-    checkingCredentials: (state) => {},
+    checkingCredentials: (state) => {
+      state.status = "checking";
+    },
   },
 });
 // Action creators are generated for each case reducer function
