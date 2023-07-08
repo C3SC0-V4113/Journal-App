@@ -4,6 +4,11 @@ import { useState } from "react";
 
 import { AuthLayout } from "../layout";
 import { useForm } from "../../hooks";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  checkingAuthentication,
+  startCreatingUserWithEmail,
+} from "../../store";
 
 const formData = {
   email: "",
@@ -34,11 +39,19 @@ export const RegisterPage = () => {
     formState,
   } = useForm(formData, formValidations);
 
+  const dispatch = useDispatch();
+
+  const { status } = useSelector((state) => state.auth);
+
   const onSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
-    console.log(formState);
+    if (!isFormValid) {
+      return;
+    }
+    dispatch(startCreatingUserWithEmail(formState));
   };
+
   return (
     <AuthLayout title="Register">
       <h1>FormValid {isFormValid ? "Valido" : "Incorrecto"}</h1>
