@@ -2,6 +2,7 @@ import { AuthRoutes } from "../auth";
 import { JournalRoutes } from "../journal";
 import { CheckingAuth } from "../ui";
 import { useCheckAuth } from "../hooks";
+import { Navigate } from "react-router-dom";
 
 export const AppRouter = () => {
   const { status } = useCheckAuth();
@@ -25,6 +26,10 @@ export const AppRouter = () => {
           {
             path: "/auth",
             children: AuthRoutes,
+          },
+          {
+            path: "/",
+            element: <Navigate to={"/auth/login"} />,
           },
         ];
   }
