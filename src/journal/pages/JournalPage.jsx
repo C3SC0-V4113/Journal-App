@@ -5,13 +5,13 @@ import { IconButton } from "@mui/material";
 import { AddOutlined } from "@mui/icons-material";
 
 import { JournalLayout } from "../layout/JournalLayout";
-import { NothingSelectedView } from "../views";
+import { NoteView, NothingSelectedView } from "../views";
 import { startNewNote } from "../../store";
 import { useMemo } from "react";
 
 export const JournalPage = () => {
   const dispatch = useDispatch();
-  const { isSaving } = useSelector((state) => state.journal);
+  const { isSaving, active } = useSelector((state) => state.journal);
 
   const isSavingStatus = useMemo(() => isSaving, [isSaving]);
 
@@ -21,8 +21,8 @@ export const JournalPage = () => {
 
   return (
     <JournalLayout>
-      <NothingSelectedView />
-      {/* <NoteView /> */}
+      {active ? <NoteView /> : <NothingSelectedView />}
+
       <IconButton
         size="large"
         sx={{
