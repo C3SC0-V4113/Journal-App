@@ -5,6 +5,7 @@ import { addNewEmptyNote, savingNewNote, setActiveNote } from "./journalSlice";
 export const startNewNote = () => {
   return async (dispatch, getState) => {
     // TODO: tarea dispatch
+    dispatch(savingNewNote());
 
     const { uid } = getState().auth;
 
@@ -20,7 +21,6 @@ export const startNewNote = () => {
 
     newNote.id = newDoc.id;
 
-    dispatch(savingNewNote());
     dispatch(addNewEmptyNote(newNote));
     dispatch(setActiveNote(newNote));
 

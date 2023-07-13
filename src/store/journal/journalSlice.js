@@ -35,12 +35,12 @@ export const journalSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   addNewEmptyNote,
+  deleteNoteById,
+  savingNewNote,
   setActiveNote,
   setNotes,
   setSaving,
   updateNote,
-  deleteNoteById,
-  savingNewNote,
 } = journalSlice.actions;
 
 // export default journalSlice.reducer;
