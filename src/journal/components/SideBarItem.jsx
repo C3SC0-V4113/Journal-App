@@ -13,18 +13,25 @@ import {
 
 import { setActiveNote } from "../../store";
 
-export const SideBarItem = ({ title = "", body = "", id = "", date }) => {
+export const SideBarItem = ({
+  title = "",
+  body = "",
+  id = "",
+  date,
+  imageUrls = ["", ""],
+}) => {
   const dispatch = useDispatch();
 
   const newTitle = useMemo(() => {
     return title.length > 17 ? title.substring(0, 17) + "..." : title;
   }, [title]);
 
+  const onClickNote = () => {
+    dispatch(setActiveNote({ id, title, body, date, imageUrls }));
+  };
+
   return (
-    <ListItem
-      disablePadding
-      onClick={() => dispatch(setActiveNote({ id, title, body, date }))}
-    >
+    <ListItem disablePadding onClick={onClickNote}>
       <ListItemButton>
         <ListItemIcon>
           <TurnedInNot />
@@ -43,4 +50,5 @@ SideBarItem.propTypes = {
   body: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   date: PropTypes.number.isRequired,
+  imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
