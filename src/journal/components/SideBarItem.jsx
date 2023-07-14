@@ -8,8 +8,13 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { useMemo } from "react";
 
-export const SideBarItem = ({ note }) => {
+export const SideBarItem = ({ title = "", body }) => {
+  const newTitle = useMemo(() => {
+    return title.length > 17 ? title.substring(0, 17) + "..." : title;
+  }, [title]);
+
   return (
     <ListItem disablePadding>
       <ListItemButton>
@@ -17,8 +22,8 @@ export const SideBarItem = ({ note }) => {
           <TurnedInNot />
         </ListItemIcon>
         <Grid container>
-          <ListItemText primary={note.title} />
-          <ListItemText secondary={note.date} />
+          <ListItemText primary={newTitle} />
+          <ListItemText secondary={body} />
         </Grid>
       </ListItemButton>
     </ListItem>
@@ -26,5 +31,6 @@ export const SideBarItem = ({ note }) => {
 };
 
 SideBarItem.propTypes = {
-  note: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
 };
