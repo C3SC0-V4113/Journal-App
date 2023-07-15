@@ -1,9 +1,11 @@
+import { useMemo } from "react";
+
+import { useSelector } from "react-redux";
 import { SaveOutlined } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography } from "@mui/material";
+
 import { ImageGallery } from "../components";
 import { useForm } from "../../hooks";
-import { useSelector } from "react-redux";
-import { useMemo } from "react";
 
 export const NoteView = () => {
   const { active: note } = useSelector((state) => state.journal);
