@@ -36,7 +36,7 @@ export const SideBarItem = ({
         <ListItemIcon>
           <TurnedInNot />
         </ListItemIcon>
-        <Grid container>
+        <Grid container direction={"column"}>
           <ListItemText primary={newTitle} />
           <ListItemText secondary={body} />
         </Grid>
