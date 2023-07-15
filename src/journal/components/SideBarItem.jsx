@@ -18,7 +18,7 @@ export const SideBarItem = ({
   body = "",
   id = "",
   date,
-  imageUrls = ["", ""],
+  imageUrls = [],
 }) => {
   const dispatch = useDispatch();
 
@@ -50,5 +50,5 @@ SideBarItem.propTypes = {
   body: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   date: PropTypes.number.isRequired,
-  imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+  imageUrls: PropTypes.arrayOf(PropTypes.string),
 };
