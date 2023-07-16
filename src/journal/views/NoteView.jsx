@@ -1,8 +1,8 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { SaveOutlined } from "@mui/icons-material";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
+import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 
 import { ImageGallery } from "../components";
@@ -42,6 +42,15 @@ export const NoteView = () => {
     dispatch(startSaveNotes());
   };
 
+  const onFileInputChange = ({ target }) => {
+    if (target.files === 0) return;
+
+    console.log("subiendo archivos");
+    // dispatch(startUploadingFiles(target.files));
+  };
+
+  const fileInputRef = useRef();
+
   return (
     <Grid
       container
@@ -57,6 +66,20 @@ export const NoteView = () => {
         </Typography>
       </Grid>
       <Grid item>
+        <input
+          type="file"
+          multiple
+          onChange={onFileInputChange}
+          style={{ display: "none" }}
+          ref={fileInputRef}
+        />
+        <IconButton
+          color="primary"
+          onClick={() => fileInputRef.current.click()}
+          disabled={isSavingStatus}
+        >
+          <UploadOutlined />
+        </IconButton>
         <Button
           onClick={onSaveNote}
           color="primary"
