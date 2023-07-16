@@ -3,6 +3,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SaveOutlined } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography } from "@mui/material";
+import Swal from "sweetalert2";
 
 import { ImageGallery } from "../components";
 import { useForm } from "../../hooks";
@@ -10,7 +11,13 @@ import { setActiveNote, startSaveNotes } from "../../store";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
-  const { isSaving, active: note } = useSelector((state) => state.journal);
+
+  const {
+    isSaving,
+    active: note,
+    messageSaved,
+  } = useSelector((state) => state.journal);
+
   const { body, title, date, formState, onInputChange } = useForm(note);
 
   const dateString = useMemo(() => {
@@ -24,6 +31,12 @@ export const NoteView = () => {
     console.log(formState);
     dispatch(setActiveNote(formState));
   }, [dispatch, formState]);
+
+  useEffect(() => {
+    if (messageSaved.length > 0) {
+      Swal.fire("Nota actualizada!", messageSaved, "success");
+    }
+  }, [messageSaved]);
 
   const onSaveNote = () => {
     dispatch(startSaveNotes());
