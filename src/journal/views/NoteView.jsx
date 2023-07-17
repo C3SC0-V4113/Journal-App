@@ -7,7 +7,11 @@ import Swal from "sweetalert2";
 
 import { ImageGallery } from "../components";
 import { useForm } from "../../hooks";
-import { setActiveNote, startSaveNotes } from "../../store";
+import {
+  setActiveNote,
+  startSaveNotes,
+  startUploadingFiles,
+} from "../../store";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -28,7 +32,7 @@ export const NoteView = () => {
   const isSavingStatus = useMemo(() => isSaving, [isSaving]);
 
   useEffect(() => {
-    console.log(formState);
+    // console.log(formState);
     dispatch(setActiveNote(formState));
   }, [dispatch, formState]);
 
@@ -46,7 +50,7 @@ export const NoteView = () => {
     if (target.files === 0) return;
 
     console.log("subiendo archivos");
-    // dispatch(startUploadingFiles(target.files));
+    dispatch(startUploadingFiles(target.files));
   };
 
   const fileInputRef = useRef();
