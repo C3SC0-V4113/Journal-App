@@ -27,18 +27,16 @@ export const LoginPage = () => {
 
   const { status, errorMessage } = useSelector((state) => state.auth);
 
-  const { email, password, onInputChange, formState } = useForm(formData);
+  const { email, password, onInputChange } = useForm(formData);
 
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(formState);
     dispatch(startLoginWithEmail({ email, password }));
   };
 
   const onGoogleSignIn = () => {
-    // console.log("onGoogleSignIn");
     dispatch(startGoogleSignIn());
   };
 
