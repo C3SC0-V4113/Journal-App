@@ -55,7 +55,11 @@ export const journalSlice = createSlice({
       state.notes = [];
       state.active = null;
     },
-    deleteNoteById: (state, action) => {},
+    deleteNoteById: (state, action) => {
+      state.notes = state.notes.filter((note) => note.id !== action.payload);
+      state.active = null;
+      state.isSaving = false;
+    },
   },
 });
 // Action creators are generated for each case reducer function
