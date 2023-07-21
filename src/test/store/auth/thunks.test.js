@@ -1,8 +1,9 @@
-import { signInWithGoogle } from "../../../firebase";
+import { loginWithEmail, signInWithGoogle } from "../../../firebase";
 import { checkingCredentials, login, logout } from "../../../store/auth";
 import {
   checkingAuthentication,
   startGoogleSignIn,
+  startLoginWithEmail,
 } from "../../../store/auth/thunks";
 import { demoUser } from "../../fixtures/authFixtures";
 
@@ -19,7 +20,7 @@ describe("pruebas en thunks.js de auth", () => {
     expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
   });
 
-  test("startGoogleSignIn debe de llamar checkingCredentials y login", async () => {
+  test("startGoogleSignIn debe de llamar checkingCredentials y login - Exito", async () => {
     const loginData = {
       ok: true,
       ...demoUser,
@@ -48,5 +49,24 @@ describe("pruebas en thunks.js de auth", () => {
 
     expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
     expect(dispatch).toHaveBeenCalledWith(logout({ errorMessage }));
+  });
+
+  test("startLoginWithEmail debe de llamar checkingCredential y login - Exito", async () => {
+    const loginData = {
+      ok: true,
+      ...demoUser,
+    };
+
+    const formData = {
+      email: demoUser.email,
+      password: "ABC123",
+    };
+
+    await loginWithEmail.mockResolvedValue(loginData);
+
+    await startLoginWithEmail(formData)(dispatch);
+
+    expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
+    expect(dispatch).toHaveBeenCalledWith(login(loginData));
   });
 });
