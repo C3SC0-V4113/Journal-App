@@ -78,6 +78,26 @@ describe("pruebas en thunks.js de auth", () => {
     expect(dispatch).toHaveBeenCalledWith(login(loginData));
   });
 
+  test("startLoginWithEmail debe de llamar checkingCredential y logout - Error", async () => {
+    const errorMessage = "Login with email failed";
+    const loginData = {
+      ok: false,
+      errorMessage,
+    };
+
+    const formData = {
+      email: demoUser.email,
+      password: "ABC123",
+    };
+
+    await loginWithEmail.mockResolvedValue(loginData);
+
+    await startLoginWithEmail(formData)(dispatch);
+
+    expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
+    expect(dispatch).toHaveBeenCalledWith(logout({ errorMessage }));
+  });
+
   test("startLogout debe de llamar logoutFirebase, clearNotes y logout", async () => {
     await startLogout()(dispatch);
 
