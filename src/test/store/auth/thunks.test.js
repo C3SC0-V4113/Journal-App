@@ -1,11 +1,13 @@
 import {
   loginWithEmail,
   logoutFirebase,
+  registerUserWithEmail,
   signInWithGoogle,
 } from "../../../firebase";
 import { checkingCredentials, login, logout } from "../../../store/auth";
 import {
   checkingAuthentication,
+  startCreatingUserWithEmail,
   startGoogleSignIn,
   startLoginWithEmail,
   startLogout,
@@ -82,5 +84,44 @@ describe("pruebas en thunks.js de auth", () => {
     expect(logoutFirebase).toHaveBeenCalled();
     expect(dispatch).toHaveBeenCalledWith(clearNotesLogout());
     expect(dispatch).toHaveBeenCalledWith(logout({ errorMessage: "" }));
+  });
+
+  test("startCreatingUserWithEmail debe llamar checkingCredentials y login - Exito", async () => {
+    const loginData = {
+      ok: true,
+      ...demoUser,
+    };
+
+    const formData = {
+      email: demoUser.email,
+      displayName: demoUser.displayName,
+      password: "ABC123",
+    };
+
+    await registerUserWithEmail.mockResolvedValue(loginData);
+
+    await startCreatingUserWithEmail(formData)(dispatch);
+
+    expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
+    expect(dispatch).toHaveBeenCalledWith(login(demoUser));
+  });
+
+  test("startCreatingUserWithEmail debe llamar checkingCredentials y logout - Error", async () => {
+    const formData = {
+      email: demoUser.email,
+      displayName: demoUser.displayName,
+      password: "ABC123",
+    };
+    const errorMessage = "Register failed";
+    const loginData = {
+      ok: false,
+      errorMessage,
+    };
+
+    await registerUserWithEmail.mockResolvedValue(loginData);
+    await startCreatingUserWithEmail(formData)(dispatch);
+
+    expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
+    expect(dispatch).toHaveBeenCalledWith(logout({ errorMessage }));
   });
 });
