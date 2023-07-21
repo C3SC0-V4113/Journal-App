@@ -1,10 +1,16 @@
-import { loginWithEmail, signInWithGoogle } from "../../../firebase";
+import {
+  loginWithEmail,
+  logoutFirebase,
+  signInWithGoogle,
+} from "../../../firebase";
 import { checkingCredentials, login, logout } from "../../../store/auth";
 import {
   checkingAuthentication,
   startGoogleSignIn,
   startLoginWithEmail,
+  startLogout,
 } from "../../../store/auth/thunks";
+import { clearNotesLogout } from "../../../store/journal";
 import { demoUser } from "../../fixtures/authFixtures";
 
 jest.mock("../../../firebase/providers");
@@ -68,5 +74,13 @@ describe("pruebas en thunks.js de auth", () => {
 
     expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
     expect(dispatch).toHaveBeenCalledWith(login(loginData));
+  });
+
+  test("startLogout debe de llamar logoutFirebase, clearNotes y logout", async () => {
+    await startLogout()(dispatch);
+
+    expect(logoutFirebase).toHaveBeenCalled();
+    expect(dispatch).toHaveBeenCalledWith(clearNotesLogout());
+    expect(dispatch).toHaveBeenCalledWith(logout({ errorMessage: "" }));
   });
 });
