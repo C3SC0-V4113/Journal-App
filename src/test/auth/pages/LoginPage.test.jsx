@@ -1,14 +1,16 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { LoginPage } from "../../../auth/pages/LoginPage";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "../../../store";
 import { MemoryRouter } from "react-router-dom";
+import { notAuthenticatedState } from "../../fixtures/authFixtures";
 
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
   },
+  preloadedState: notAuthenticatedState,
 });
 
 describe("Pruebas en <LoginPage/>", () => {
@@ -23,6 +25,22 @@ describe("Pruebas en <LoginPage/>", () => {
 
     // screen.debug();
 
-    expect(screen.getAllByAltText("Login").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Login").length).toBeGreaterThanOrEqual(1);
+  });
+
+  test("Botón de Google debe de llamar startGoogleSignIn", () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <LoginPage />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const googleBtn = screen.getByLabelText("google-sign-in");
+    // console.log(googleBtn);
+    fireEvent.click(googleBtn);
+
+    console.log(store.getState());
   });
 });
