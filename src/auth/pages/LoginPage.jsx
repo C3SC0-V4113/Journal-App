@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 
-import { Google } from "@mui/icons-material";
+import Google from "@mui/icons-material/Google";
 import {
   Alert,
   Button,
@@ -37,6 +37,7 @@ export const LoginPage = () => {
   };
 
   const onGoogleSignIn = () => {
+    // console.log("Google Sign In");
     dispatch(startGoogleSignIn());
   };
 

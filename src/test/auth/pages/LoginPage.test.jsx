@@ -6,11 +6,17 @@ import { authSlice } from "../../../store";
 import { MemoryRouter } from "react-router-dom";
 import { notAuthenticatedState } from "../../fixtures/authFixtures";
 
+const mockStartGoogleSignIn = jest.fn();
+
+jest.mock("../../../store/auth/thunks", () => ({
+  startGoogleSignIn: () => mockStartGoogleSignIn,
+}));
+
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
   },
-  preloadedState: notAuthenticatedState,
+  preloadedState: { auth: notAuthenticatedState },
 });
 
 describe("Pruebas en <LoginPage/>", () => {
@@ -38,9 +44,8 @@ describe("Pruebas en <LoginPage/>", () => {
     );
 
     const googleBtn = screen.getByLabelText("google-sign-in");
-    // console.log(googleBtn);
     fireEvent.click(googleBtn);
 
-    console.log(store.getState());
+    expect(mockStartGoogleSignIn).toHaveBeenCalledWith();
   });
 });
