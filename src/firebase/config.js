@@ -9,14 +9,14 @@ import { getEnvironments } from "../helpers";
 // console.log(import.meta.env);
 // console.log(process.env);
 
-const {
-  VITE_APIKEY,
-  VITE_AUTHDOMAIN,
-  VITE_PROJECTID,
-  VITE_STORAGEBUCKET,
-  VITE_MESSAGINGSENDERID,
-  VITE_APPID,
-} = getEnvironments();
+// const {
+//   VITE_APIKEY,
+//   VITE_AUTHDOMAIN,
+//   VITE_PROJECTID,
+//   VITE_STORAGEBUCKET,
+//   VITE_MESSAGINGSENDERID,
+//   VITE_APPID,
+// } = getEnvironments();
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
