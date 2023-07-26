@@ -7,9 +7,18 @@ import { MemoryRouter } from "react-router-dom";
 import { notAuthenticatedState } from "../../fixtures/authFixtures";
 
 const mockStartGoogleSignIn = jest.fn();
+const mockStartLoginWithEmail = jest.fn();
 
 jest.mock("../../../store/auth/thunks", () => ({
   startGoogleSignIn: () => mockStartGoogleSignIn,
+  startLoginWithEmail: ({ email, password }) => {
+    return () => mockStartLoginWithEmail({ email, password });
+  },
+}));
+
+jest.mock("react-redux", () => ({
+  ...jest.requireActual("react-redux"),
+  useDispatch: () => (fn) => fn(),
 }));
 
 const store = configureStore({
@@ -20,6 +29,7 @@ const store = configureStore({
 });
 
 describe("Pruebas en <LoginPage/>", () => {
+  beforeEach(() => jest.clearAllMocks());
   test("debe de mostrar el componente correctamente", () => {
     render(
       <Provider store={store}>
@@ -70,5 +80,10 @@ describe("Pruebas en <LoginPage/>", () => {
 
     const loginForm = screen.getByLabelText("submit-form");
     fireEvent.submit(loginForm);
+
+    expect(mockStartLoginWithEmail).toHaveBeenCalledWith({
+      email,
+      password,
+    });
   });
 });
