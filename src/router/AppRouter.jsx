@@ -1,6 +1,6 @@
 import { AuthRoutes } from "../auth";
 import { JournalRoutes } from "../journal";
-import { CheckingAuth } from "../ui";
+import { CheckingAuth, RoutingError } from "../ui";
 import { useCheckAuth } from "../hooks";
 import { Navigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ export const AppRouter = () => {
       {
         path: "*",
         element: <CheckingAuth />,
+        errorElement: <RoutingError />,
       },
     ];
   } else {
@@ -19,12 +20,14 @@ export const AppRouter = () => {
       ? [
           {
             path: "/",
+            errorElement: <RoutingError />,
             children: JournalRoutes,
           },
         ]
       : [
           {
             path: "/auth",
+            errorElement: <RoutingError />,
             children: AuthRoutes,
           },
           {
