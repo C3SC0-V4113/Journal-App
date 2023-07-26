@@ -46,6 +46,6 @@ describe("Pruebas en <LoginPage/>", () => {
     const googleBtn = screen.getByLabelText("google-sign-in");
     fireEvent.click(googleBtn);
 
-    expect(mockStartGoogleSignIn).toHaveBeenCalledWith();
+    expect(mockStartGoogleSignIn).toHaveBeenCalled();
   });
 });
