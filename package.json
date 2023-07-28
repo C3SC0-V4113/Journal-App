@@ -3,6 +3,29 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ],
+  "release": {
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json",
+          "package-lock.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -30,6 +53,8 @@
   "devDependencies": {
     "@babel/preset-env": "^7.22.9",
     "@babel/preset-react": "^7.22.5",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.3",
     "@types/react": "^18.0.37",
