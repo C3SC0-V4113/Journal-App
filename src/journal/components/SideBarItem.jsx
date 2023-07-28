@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { TurnedInNot } from "@mui/icons-material";
+import TurnedInNot from "@mui/icons-material/TurnedInNot";
 import {
   Grid,
   ListItem,

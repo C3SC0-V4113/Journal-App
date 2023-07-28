@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
+import LogoutOutlined from "@mui/icons-material/LogoutOutlined";
+import MenuOutlined from "@mui/icons-material/MenuOutlined";
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../store";

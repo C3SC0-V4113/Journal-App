@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  DeleteOutline,
-  SaveOutlined,
-  UploadOutlined,
-} from "@mui/icons-material";
+import DeleteOutline from "@mui/icons-material/DeleteOutline";
+import SaveOutlined from "@mui/icons-material/SaveOutlined";
+import UploadOutlined from "@mui/icons-material/UploadOutlined";
 import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 

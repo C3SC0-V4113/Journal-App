@@ -9,13 +9,13 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
     plugins: [react()],
-    define: {
-      VITE_APIKEY: JSON.stringify(env.VITE_APIKEY),
-      VITE_AUTHDOMAIN: JSON.stringify(env.VITE_AUTHDOMAIN),
-      VITE_PROJECTID: JSON.stringify(env.VITE_PROJECTID),
-      VITE_STORAGEBUCKET: JSON.stringify(env.VITE_STORAGEBUCKET),
-      VITE_MESSAGINGSENDERID: JSON.stringify(env.VITE_MESSAGINGSENDERID),
-      VITE_APPID: JSON.stringify(env.VITE_APPID),
-    },
+    // define: {
+    //   VITE_APIKEY: JSON.stringify(env.VITE_APIKEY),
+    //   VITE_AUTHDOMAIN: JSON.stringify(env.VITE_AUTHDOMAIN),
+    //   VITE_PROJECTID: JSON.stringify(env.VITE_PROJECTID),
+    //   VITE_STORAGEBUCKET: JSON.stringify(env.VITE_STORAGEBUCKET),
+    //   VITE_MESSAGINGSENDERID: JSON.stringify(env.VITE_MESSAGINGSENDERID),
+    //   VITE_APPID: JSON.stringify(env.VITE_APPID),
+    // },
   };
 });
