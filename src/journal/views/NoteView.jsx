@@ -35,7 +35,6 @@ export const NoteView = () => {
   const isSavingStatus = useMemo(() => isSaving, [isSaving]);
 
   useEffect(() => {
-    // console.log(formState);
     dispatch(setActiveNote(formState));
   }, [dispatch, formState]);
 
@@ -56,7 +55,6 @@ export const NoteView = () => {
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
 
-    console.log("subiendo archivos");
     dispatch(startUploadingFiles(target.files));
   };
 
