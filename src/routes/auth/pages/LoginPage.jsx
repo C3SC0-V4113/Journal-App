@@ -44,7 +44,6 @@ export const LoginPage = () => {
 
   useEffect(() => {
     setTitle("Login");
-    console.log(title);
   }, [title, setTitle]);
 
   return (

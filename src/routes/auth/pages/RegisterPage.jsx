@@ -63,7 +63,6 @@ export const RegisterPage = () => {
 
   useEffect(() => {
     setTitle("Register");
-    console.log(title);
   }, [title, setTitle]);
 
   return (
