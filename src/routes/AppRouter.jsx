@@ -1,5 +1,5 @@
-import { AuthRoutes } from "../auth";
-import { JournalRoutes } from "../journal";
+import { AuthRoutes } from "./auth";
+import { JournalRoutes } from "./journal";
 import { CheckingAuth, RoutingError } from "../ui";
 import { useCheckAuth } from "../hooks";
 import { Navigate } from "react-router-dom";

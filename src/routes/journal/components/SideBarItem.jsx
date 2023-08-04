@@ -2,6 +2,7 @@ import { useMemo } from "react";
 
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+
 import TurnedInNot from "@mui/icons-material/TurnedInNot";
 import {
   Grid,
@@ -11,7 +12,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { setActiveNote } from "../../store";
+import { setActiveNote } from "../../../store";
 
 export const SideBarItem = ({
   title = "",

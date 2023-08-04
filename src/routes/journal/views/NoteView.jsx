@@ -8,13 +8,13 @@ import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 
 import { ImageGallery } from "../components";
-import { useForm } from "../../hooks";
+import { useForm } from "../../../hooks";
 import {
   setActiveNote,
   startDeletingNote,
   startSaveNotes,
   startUploadingFiles,
-} from "../../store";
+} from "../../../store";
 
 export const NoteView = () => {
   const dispatch = useDispatch();

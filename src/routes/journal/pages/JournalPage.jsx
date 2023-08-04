@@ -6,7 +6,7 @@ import AddOutlined from "@mui/icons-material/AddOutlined";
 
 import { JournalLayout } from "../layout/JournalLayout";
 import { NoteView, NothingSelectedView } from "../views";
-import { startNewNote } from "../../store";
+import { startNewNote } from "../../../store";
 
 export const JournalPage = () => {
   const dispatch = useDispatch();

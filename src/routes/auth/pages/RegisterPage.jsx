@@ -10,9 +10,9 @@ import { Link as RouterLink } from "react-router-dom";
 import { useMemo, useState } from "react";
 
 import { AuthLayout } from "../layout";
-import { useForm } from "../../hooks";
+import { useForm } from "../../../hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { startCreatingUserWithEmail } from "../../store";
+import { startCreatingUserWithEmail } from "../../../store";
 
 const formData = {
   email: "",

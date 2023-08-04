@@ -14,8 +14,8 @@ import {
 } from "@mui/material";
 
 import { AuthLayout } from "../layout";
-import { useForm } from "../../hooks";
-import { startGoogleSignIn, startLoginWithEmail } from "../../store";
+import { useForm } from "../../../hooks";
+import { startGoogleSignIn, startLoginWithEmail } from "../../../store";
 
 const formData = {
   email: "",
