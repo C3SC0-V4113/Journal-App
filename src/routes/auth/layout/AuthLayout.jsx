@@ -1,7 +1,9 @@
-import PropTypes from "prop-types";
+import { Outlet } from "react-router-dom";
 import { Grid, Typography } from "@mui/material";
+import { useState } from "react";
 
-export const AuthLayout = ({ children, title = "" }) => {
+export const AuthLayout = () => {
+  const [title, setTitle] = useState("");
   return (
     <Grid
       container
@@ -25,13 +27,8 @@ export const AuthLayout = ({ children, title = "" }) => {
         <Typography variant="h5" sx={{ mb: 1 }}>
           {title}
         </Typography>
-        {children}
+        <Outlet context={[title, setTitle]} />
       </Grid>
     </Grid>
   );
-};
-
-AuthLayout.propTypes = {
-  children: PropTypes.node.isRequired,
-  title: PropTypes.string,
 };

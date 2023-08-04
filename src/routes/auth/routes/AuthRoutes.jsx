@@ -4,7 +4,6 @@ import { LoginPage, RegisterPage } from "../pages";
 export const AuthRoutes = [
   {
     index: true,
-    path: "login",
     element: <LoginPage />,
   },
   {
@@ -13,6 +12,6 @@ export const AuthRoutes = [
   },
   {
     path: "*",
-    element: <Navigate to={"/auth/login"} />,
+    element: <Navigate to={"/auth"} />,
   },
 ];
