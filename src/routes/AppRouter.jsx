@@ -4,6 +4,7 @@ import { CheckingAuth, RoutingError } from "../ui";
 import { useCheckAuth } from "../hooks";
 import { Navigate } from "react-router-dom";
 import { AuthLayout } from "./auth/layout";
+import { JournalLayout } from "./journal/layout/JournalLayout";
 
 export const AppRouter = () => {
   const { status } = useCheckAuth();
@@ -21,6 +22,7 @@ export const AppRouter = () => {
       ? [
           {
             path: "/",
+            element: <JournalLayout />,
             errorElement: <RoutingError />,
             children: JournalRoutes,
           },

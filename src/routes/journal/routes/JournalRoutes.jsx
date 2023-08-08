@@ -1,11 +1,12 @@
 import { Navigate } from "react-router-dom";
-import { JournalPage } from "../pages/JournalPage";
+import { NoteView, NothingSelectedView } from "../views";
 
 export const JournalRoutes = [
   {
     index: true,
-    element: <JournalPage />,
+    element: <NothingSelectedView />,
   },
+  { path: ":journalId", element: <NoteView /> },
   {
     path: "/*",
     element: <Navigate to={"/"} />,
