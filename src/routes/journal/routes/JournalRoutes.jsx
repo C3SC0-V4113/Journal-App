@@ -6,7 +6,7 @@ export const JournalRoutes = [
     index: true,
     element: <NothingSelectedView />,
   },
-  { path: ":journalId", element: <NoteView /> },
+  { path: "/:journalId", element: <NoteView /> },
   {
     path: "/*",
     element: <Navigate to={"/"} />,

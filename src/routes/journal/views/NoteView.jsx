@@ -130,7 +130,7 @@ export const NoteView = () => {
           Borrar
         </Button>
       </Grid>
-      <ImageGallery images={note.imageUrls} />
+      {note ? <ImageGallery images={note.imageUrls} /> : <></>}
     </Grid>
   );
 };

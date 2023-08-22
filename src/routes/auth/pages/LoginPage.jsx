@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useMemo } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Link as RouterLink, useOutletContext } from "react-router-dom";
+import { Form, Link as RouterLink, useOutletContext } from "react-router-dom";
 
 import Google from "@mui/icons-material/Google";
 import {
@@ -34,23 +34,25 @@ export const LoginPage = () => {
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
   const onSubmit = (event) => {
-    event.preventDefault();
-    dispatch(startLoginWithEmail({ email, password }));
+    //Sevent.preventDefault();
+    //dispatch(startLoginWithEmail({ email, password }));
   };
 
-  const onGoogleSignIn = () => {
-    dispatch(startGoogleSignIn());
-  };
+  // const onGoogleSignIn = () => {
+  //   dispatch(startGoogleSignIn());
+  // };
 
   useEffect(() => {
     setTitle("Login");
   }, [title, setTitle]);
 
   return (
-    <form
+    <Form
       className="animate__animated animate__fadeIn animate__faster"
       onSubmit={onSubmit}
       aria-label="submit-form"
+      action="login"
+      method="post"
     >
       <Grid container>
         <Grid item xs={12} sx={{ marginTop: 2 }}>
@@ -86,6 +88,8 @@ export const LoginPage = () => {
             <Button
               disabled={isAuthenticating}
               type="submit"
+              name="intent"
+              value="mail"
               variant="contained"
               fullWidth
             >
@@ -95,9 +99,12 @@ export const LoginPage = () => {
           <Grid item xs={12} sm={6}>
             <Button
               disabled={isAuthenticating}
+              type="submit"
+              name="intent"
+              value="google"
               variant="outlined"
               fullWidth
-              onClick={onGoogleSignIn}
+              //onClick={onGoogleSignIn}
               aria-label="google-sign-in"
             >
               <Google /> <Typography sx={{ ml: 1 }}>Google</Typography>
@@ -110,6 +117,6 @@ export const LoginPage = () => {
           </Link>
         </Grid>
       </Grid>
-    </form>
+    </Form>
   );
 };
