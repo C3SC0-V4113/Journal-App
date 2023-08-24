@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { startGoogleSignIn } from "./thunks";
 
 export const authSlice = createSlice({
   name: "auth",
@@ -30,6 +31,12 @@ export const authSlice = createSlice({
     checkingCredentials: (state) => {
       state.status = "checking";
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(startGoogleSignIn.fulfilled, (state, action) => {
+      // Add user to the state array
+      login(action.payload);
+    });
   },
 });
 // Action creators are generated for each case reducer function

@@ -1,3 +1,4 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   loginWithEmail,
   logoutFirebase,
@@ -13,18 +14,20 @@ export const checkingAuthentication = () => {
   };
 };
 
-export const startGoogleSignIn = () => {
-  return async (dispatch) => {
-    dispatch(checkingCredentials());
+export const startGoogleSignIn = createAsyncThunk(
+  "auth/googlelogin",
+  async () => {
+    //dispatch(checkingCredentials());
 
     const result = await signInWithGoogle();
-    if (!result.ok) {
-      return dispatch(logout({ errorMessage: result.errorMessage }));
-    }
+    return result;
+    // if (!result.ok) {
+    //   return dispatch(logout({ errorMessage: result.errorMessage }));
+    // }
 
-    return dispatch(login(result));
-  };
-};
+    // return dispatch(login(result));
+  }
+);
 
 export const startCreatingUserWithEmail = ({
   email,
