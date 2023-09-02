@@ -79,7 +79,7 @@ export const AppRouter = () => {
               default:
                 break;
             }
-            return redirect("/");
+            return redirect("/checking");
           },
         },
         {
@@ -96,17 +96,6 @@ export const AppRouter = () => {
       path: "/checking",
       element: <CheckingAuth />,
       errorElement: <RoutingError />,
-      loader: async () => {
-        console.log(status);
-        switch (status) {
-          case "authenticated":
-            return redirect("/");
-          case "unauthenticated":
-            return redirect("/auth");
-          default:
-            return redirect("/auth");
-        }
-      },
     },
   ];
 };
