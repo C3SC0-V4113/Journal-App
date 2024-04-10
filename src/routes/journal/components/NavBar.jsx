@@ -4,31 +4,49 @@ import { useDispatch } from "react-redux";
 
 import LogoutOutlined from "@mui/icons-material/LogoutOutlined";
 import MenuOutlined from "@mui/icons-material/MenuOutlined";
-import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Grid,
+  IconButton,
+  Toolbar,
+  Typography,
+  useTheme,
+} from "@mui/material";
 
 import { startLogout } from "../../../store";
 
-export const NavBar = ({ drawerWidth }) => {
+export const NavBar = ({ drawerWidth, open, handleDrawerOpen }) => {
   const dispatch = useDispatch();
   const onLogout = () => {
     dispatch(startLogout());
   };
+  const theme = useTheme();
 
   return (
     <AppBar
       position="fixed"
       sx={{
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
-        ml: {
-          sm: `${drawerWidth}px`,
-        },
+        transition: theme.transitions.create(["margin", "width"], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        ...(open && {
+          width: `calc(100% - ${drawerWidth}px)`,
+          ml: `${drawerWidth}px`,
+          transition: theme.transitions.create(["margin", "width"], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
+        }),
       }}
     >
       <Toolbar>
         <IconButton
           color="inherit"
           edge="start"
-          sx={{ mr: 2, display: { sm: "none" } }}
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          sx={{ mr: 2, ...(open && { display: "none" }) }}
         >
           <MenuOutlined />
         </IconButton>
@@ -37,12 +55,15 @@ export const NavBar = ({ drawerWidth }) => {
           direction={"row"}
           alignItems={"center"}
           justifyContent={"space-between"}
+          sx={{
+            minWidth: 320,
+            overflowX: "hidden",
+          }}
         >
           <Typography variant="h6" noWrap component={"div"}>
             Journal App
           </Typography>
           <IconButton onClick={onLogout} color="error">
-            {" "}
             <LogoutOutlined />
           </IconButton>
         </Grid>
@@ -53,4 +74,6 @@ export const NavBar = ({ drawerWidth }) => {
 
 NavBar.propTypes = {
   drawerWidth: PropTypes.number.isRequired,
+  open: PropTypes.bool.isRequired,
+  handleDrawerOpen: PropTypes.func.isRequired,
 };

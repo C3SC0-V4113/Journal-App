@@ -13,7 +13,7 @@ export const RoutingError = () => {
       justifyContent={"center"}
       sx={{ minHeight: "100vh", backgroundColor: "primary.main", padding: 4 }}
     >
-      <Grid itemScope justifyContent={"center"} direction={"column"}>
+      <Grid itemScope container justifyContent={"center"} direction={"column"}>
         <Typography color={"white"} variant="h5">
           Theres been an error!
         </Typography>

@@ -26,6 +26,10 @@ export const AppRouter = () => {
             errorElement: <RoutingError />,
             children: JournalRoutes,
           },
+          {
+            path: "*",
+            element: <Navigate to={"/"} />,
+          },
         ]
       : [
           {
