@@ -15,6 +15,7 @@ import {
   startSaveNotes,
   startUploadingFiles,
 } from "../../../store";
+import { useNavigate } from "react-router-dom";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -32,11 +33,13 @@ export const NoteView = () => {
     return newDate.toUTCString();
   }, [date]);
 
+  const navigate = useNavigate();
+
   const isSavingStatus = useMemo(() => isSaving, [isSaving]);
 
   useEffect(() => {
-    dispatch(setActiveNote(formState));
-  }, [dispatch, formState]);
+    note ? dispatch(setActiveNote(formState)) : navigate("/");
+  }, [dispatch, formState, navigate]);
 
   useEffect(() => {
     if (messageSaved.length > 0) {

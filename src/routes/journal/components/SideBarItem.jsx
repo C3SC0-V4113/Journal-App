@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 
 import { setActiveNote } from "../../../store";
+import { useNavigate } from "react-router-dom";
 
 export const SideBarItem = ({
   title = "",
@@ -22,12 +23,14 @@ export const SideBarItem = ({
   imageUrls = [],
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const newTitle = useMemo(() => {
     return title.length > 17 ? title.substring(0, 17) + "..." : title;
   }, [title]);
 
   const onClickNote = () => {
+    navigate(`/note/${id}`);
     dispatch(setActiveNote({ id, title, body, date, imageUrls }));
   };
 
