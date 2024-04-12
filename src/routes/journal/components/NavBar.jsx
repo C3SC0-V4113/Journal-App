@@ -40,7 +40,12 @@ export const NavBar = ({ drawerWidth, open, handleDrawerOpen }) => {
         }),
       }}
     >
-      <Toolbar>
+      <Toolbar
+        sx={{
+          minWidth: 320,
+          overflowX: "hidden",
+        }}
+      >
         <IconButton
           color="inherit"
           edge="start"
@@ -55,10 +60,6 @@ export const NavBar = ({ drawerWidth, open, handleDrawerOpen }) => {
           direction={"row"}
           alignItems={"center"}
           justifyContent={"space-between"}
-          sx={{
-            minWidth: 320,
-            overflowX: "hidden",
-          }}
         >
           <Typography variant="h6" noWrap component={"div"}>
             Journal App

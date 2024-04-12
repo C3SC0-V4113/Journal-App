@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 
 import { ImageList, ImageListItem } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export const ImageGallery = ({ images = [] }) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
   return (
-    <ImageList sx={{ width: "100%", height: 500 }} cols={4} rowHeight={200}>
+    <ImageList sx={{ width: "100%", height: "auto" }} cols={matches ? 1 : 4}>
       {images.map((image) => (
         <ImageListItem key={image}>
           <img
-            src={`${image}?w=200&h=200&fit=crop&auto=format`}
-            srcSet={`${image}?w=200&h=200&fit=crop&auto=format&dpr=2 2x`}
+            src={`${image}?w=248&fit=crop&auto=format`}
+            srcSet={`${image}?w=248&fit=crop&auto=format&dpr=2 2x`}
             alt={"Imagen de la nota"}
             loading="lazy"
           />

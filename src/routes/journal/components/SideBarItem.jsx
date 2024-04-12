@@ -42,7 +42,15 @@ export const SideBarItem = ({
         </ListItemIcon>
         <Grid container direction={"column"}>
           <ListItemText primary={newTitle} />
-          <ListItemText secondary={body} />
+          <ListItemText
+            sx={{
+              width: 150,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            secondary={body}
+          />
         </Grid>
       </ListItemButton>
     </ListItem>
